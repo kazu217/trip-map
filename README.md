@@ -1,6 +1,6 @@
 # TripMap
 
-[![Typecheck](https://github.com/kazu217/trip-map/actions/workflows/typecheck.yml/badge.svg)](https://github.com/kazu217/trip-map/actions/workflows/typecheck.yml)
+[![CI](https://github.com/kazu217/trip-map/actions/workflows/ci.yml/badge.svg)](https://github.com/kazu217/trip-map/actions/workflows/ci.yml)
 
 **App Store：** https://apps.apple.com/jp/app/id6784323563
 
