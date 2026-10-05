@@ -1,5 +1,17 @@
 # TripMap
 
+[![Typecheck](https://github.com/kazu217/trip-map/actions/workflows/typecheck.yml/badge.svg)](https://github.com/kazu217/trip-map/actions/workflows/typecheck.yml)
+
+**App Store：** https://apps.apple.com/jp/app/id6784323563
+
+> 日本語概要：Trip.com・Expedia・Hotels.com など複数の予約サイトに散らばる旅行情報（ホテル・交通・ツアー・予約番号・チケット）を
+> 1つの旅行ノートにまとめ、地図とタイムラインで「次はどこへ、何時に」をすぐ確認できる iOS / Android アプリ。
+> クライアントからの依頼を受け、ヒアリング・要件定義・仕様書作成から実装・ストア公開までを一人で担当した。
+>
+> - **技術：** React Native（Expo）/ TypeScript / Zustand / Firebase（匿名認証・Firestore）/ Google Maps
+> - **設計の工夫：** オフラインファースト（端末内保存が基本、クラウド同期は任意）、カテゴリ別番号付きピン、予約文面の取り込み
+> - **セキュリティ：** ユーザーごとにデータを分離する [Firestoreルール](firestore.rules) / [Storageルール](storage.rules)、APIキーは `.env`（Git管理外）で注入
+
 Offline-first travel itinerary organizer built with Expo, React Native, and
 TypeScript.
 
@@ -85,7 +97,7 @@ npm run typecheck
 - Improve accessibility labels and focus behavior across forms
 - Add import examples for common booking text formats
 - Improve Firebase sync conflict handling
-- Add CI checks for TypeScript and documentation links
+- Add CI checks for documentation links
 - Add screenshots and a web demo workflow
 
 ## License
