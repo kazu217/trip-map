@@ -1,6 +1,6 @@
 # TripMap App Store Submission Flow
 
-Last updated: 2026-06-26
+Last updated: 2026-06-30
 
 This document records the iPhone App Store submission flow for TripMap.
 Do not store API keys, private keys, issuer IDs, passwords, or one-time codes in this file.
@@ -11,10 +11,98 @@ Do not store API keys, private keys, issuer IDs, passwords, or one-time codes in
 - Apple App ID: 6784323563
 - iOS bundle ID: com.uri.tripmap
 - App Store version: 1.2.3
-- Build number: 19
-- Review submission ID: 2610f80a-b2e3-4cb0-bcae-f661463a7261
+- Build number: 21
+- Review submission ID: 7e481a3d-87c3-4723-b0a8-a42cea3efddc
 - Submission state: WAITING_FOR_REVIEW
 - Release type: Manual release
+
+## Latest Review Feedback
+
+Apple rejected build `1.2.3 (21)` on 2026-06-30 under guideline 2.3.8
+because the App Store screenshots included non-iOS status bar imagery.
+
+Fix:
+
+- Removed the Android-style status bar area from the iPhone 6.5-inch and iPad
+  13-inch App Store screenshots.
+- Uploaded replacement screenshots for:
+  - `APP_IPHONE_65`
+  - `APP_IPAD_PRO_3GEN_129`
+- Confirmed all replacement screenshot assets reached `COMPLETE` processing
+  state in App Store Connect.
+
+## Previous Review Feedback
+
+Apple rejected build `1.2.3 (20)` on 2026-06-29 under guideline 2.3.8
+because the app icon looked like a placeholder icon instead of final content.
+
+Fix:
+
+- Replaced the Expo-style placeholder app icon with a TripMap-specific folded map, route, and pin icon.
+- Regenerated `assets/icon.png` as a 1024x1024 RGB PNG with no alpha channel.
+- Regenerated the matching splash, favicon, Android adaptive icon, and Play Console 512px icon assets.
+- Bumped the next iOS build number to `21` in `app.config.js`.
+- Removed the remote push notification entitlement from iOS prebuild output because TripMap only schedules local notifications.
+
+## 2026-06-29 Resubmission
+
+Uploaded and resubmitted version `1.2.3`, build `21`.
+
+Artifacts:
+
+- Archive: `dist/ios/TripMap-1.2.3-21.xcarchive`
+- IPA: `dist/ios/export-21/TripMap.ipa`
+- Archive log: `dist/ios/logs/archive-1.2.3-21.log`
+- Export log: `dist/ios/logs/export-1.2.3-21.log`
+- Validation log: `dist/ios/logs/validate-1.2.3-21.log`
+- Upload log: `dist/ios/logs/upload-1.2.3-21.log`
+
+Verification:
+
+- Apple validation finished without errors.
+- Uploaded build ID: `bd528be8-a541-42de-8b34-3e5e4a07d70c`
+- Build number: `21`
+- Processing state: `VALID`
+- Selected build for App Store version `1.2.3`: `bd528be8-a541-42de-8b34-3e5e4a07d70c`
+
+Final verified state:
+
+- Review submission state: `WAITING_FOR_REVIEW`
+- App Store version state: `WAITING_FOR_REVIEW`
+- Submitted date: `2026-06-29T04:06:38.755Z`
+
+## 2026-06-30 Screenshot Resubmission
+
+Uploaded revised screenshots and resubmitted version `1.2.3`, build `21`.
+
+Updated screenshot sets:
+
+- `APP_IPAD_PRO_3GEN_129`
+  - `ipadPro129_01.png`
+  - `ipadPro129_02.png`
+  - `ipadPro129_03.png`
+  - `ipadPro129_04.png`
+  - `ipadPro129_05.png`
+- `APP_IPHONE_65`
+  - `iphone_65_01.png`
+  - `iphone_65_02.png`
+  - `iphone_65_03.png`
+  - `iphone_65_04.png`
+  - `iphone_65_05.png`
+
+Verification:
+
+- Replacement screenshots uploaded and processed successfully.
+- Old screenshots with non-iOS status bar imagery were removed from App Store
+  Connect.
+- Review submission item state changed from `REJECTED` to
+  `READY_FOR_REVIEW`.
+
+Final verified state:
+
+- Review submission state: `WAITING_FOR_REVIEW`
+- App Store version state: `WAITING_FOR_REVIEW`
+- Submitted date: `2026-06-30T13:39:03.197Z`
 
 ## Public URLs
 

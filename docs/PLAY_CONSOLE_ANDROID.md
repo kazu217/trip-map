@@ -148,24 +148,42 @@ Security practices:
 
 ## Internal Testing
 
+2026-07-21にGoogle Play Developer APIで内部テストを更新済みです。
+
+- Track: `internal`
+- Release name: `TripMap 1.2.3 (23)`
+- Version code: `23`
+- Status: `completed`
+- Release notes: `Android版でGoogle Mapsの地図タイルが表示されない問題に対応しました。`
+
+手動で更新する場合:
+
 1. `Internal testing` を開く
 2. 新しいリリースを作成
 3. `dist/android/TripMap-production.aab` をアップロード
-4. Release name: `1.0.6`
+4. Release name: `TripMap 1.2.3 (23)`
 5. Release notes:
 
 ```text
-TripMap v1.0.6
-
-- AndroidでGoogle Mapsの実地図を表示できるよう修正
-- レストランの登録に対応
-- 電話番号、営業時間、施設情報を追加
-- 日程表から次の予定へのルートと所要時間をGoogle Mapsで確認可能
-- Firebaseへの旅行データ同期を有効化
-- 無料プランでは添付画像を端末内へ保存
+Android版でGoogle Mapsの地図タイルが表示されない問題に対応しました。
 ```
 
 6. Review release
 7. Start rollout to internal testing
 
 最終送信はGoogle Play上の状態変更になるため、送信直前に内容を確認してください。
+
+## Closed Testing
+
+新しい個人デベロッパーアカウントで本番公開を申請する場合は、Closed testingで12人以上のテスターが14日連続でopt-inしている必要があります。
+
+テスターはPlay Consoleの `Testing > Closed testing > Manage track > Testers` でメールリストとして追加できます。CSVを使う場合は、次の形式で1行1メールアドレスにします。
+
+```text
+tester1@example.com
+tester2@example.com
+```
+
+ローカル確認用のCSVは `dist/play-console/closed-testers.csv` に置きます。`dist/` はgit管理外なので、メールアドレスをリポジトリへコミットしないでください。
+
+Closed testingの公開後は、テスターへopt-inリンクを共有し、各Googleアカウントで14日間連続してopt-in状態を維持してもらってから本番アクセスを申請してください。

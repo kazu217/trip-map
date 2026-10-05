@@ -9,7 +9,7 @@ npm install
 cp .env.example .env
 ```
 
-Google MapsとFirebaseを使う場合は `.env` に値を入れてください。APIキー未設定でもアプリは起動し、地図はフォールバック表示になります。
+Google MapsとFirebaseを使う場合は `.env` に値を入れてください。APIキー未設定でもアプリは起動し、地図はフォールバック表示になります。Android本番ビルドでは `EXPO_PUBLIC_GOOGLE_MAPS_ANDROID_API_KEY`、`GOOGLE_MAPS_ANDROID_API_KEY`、または `GOOGLE_MAPS_API_KEY` のいずれかをビルド環境に設定してください。
 
 ## 2. Expo Goで確認
 
@@ -153,6 +153,7 @@ Android:
 
 - Google Play Consoleアカウント
 - 本番用Firebase/Google Maps設定
+- Google Maps APIキーはAndroidアプリ制限に `com.tripmap.app` と本番署名証明書のSHA-1を登録
 - プライバシーポリシー
 - Data safety入力
 

@@ -72,6 +72,7 @@ export const MapPreview = ({ spots, onSpotPress }: MapPreviewProps) => {
   const NativeMap = maps?.default;
   const Marker = maps?.Marker;
   const Polyline = maps?.Polyline;
+  const Circle = maps?.Circle;
   const googleProvider = maps?.PROVIDER_GOOGLE;
 
   if (NativeMap && Marker && allPoints.length > 0) {
@@ -110,15 +111,37 @@ export const MapPreview = ({ spots, onSpotPress }: MapPreviewProps) => {
           {routeSegments.map((segment, index) => (
             <Polyline key={`route_${index}`} coordinates={segment} strokeColor={colors.primary} strokeWidth={4} />
           ))}
-          {allPoints.map((point) => (
+          {Circle
+            ? allPoints.map((point, index) => (
+                <Circle
+                  key={`${point.id}_circle`}
+                  center={{ latitude: point.lat, longitude: point.lng }}
+                  radius={120}
+                  fillColor={spotTypeColors[point.type]}
+                  strokeColor={colors.surface}
+                  strokeWidth={4}
+                  zIndex={1000 + index}
+                  onPress={() => onSpotPress(point.spot)}
+                />
+              ))
+            : null}
+          {allPoints.map((point, index) => (
             <Marker
               key={point.id}
               title={point.name}
               description={point.address}
-              pinColor={spotTypeColors[point.type]}
               coordinate={{ latitude: point.lat, longitude: point.lng }}
+              anchor={{ x: 0.5, y: 1 }}
+              zIndex={index + 1}
               onPress={() => onSpotPress(point.spot)}
-            />
+            >
+              <View style={styles.nativeMarkerWrap}>
+                <View style={[styles.nativeMarker, { backgroundColor: spotTypeColors[point.type] }]}>
+                  <Text style={styles.nativeMarkerText}>{index + 1}</Text>
+                </View>
+                <View style={[styles.nativeMarkerStem, { borderTopColor: spotTypeColors[point.type] }]} />
+              </View>
+            </Marker>
           ))}
         </NativeMap>
       </View>
@@ -173,6 +196,33 @@ const styles = StyleSheet.create({
   },
   nativeMap: {
     flex: 1
+  },
+  nativeMarkerWrap: {
+    alignItems: 'center'
+  },
+  nativeMarker: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 3,
+    borderColor: colors.surface
+  },
+  nativeMarkerText: {
+    color: colors.surface,
+    fontSize: 13,
+    fontWeight: '900'
+  },
+  nativeMarkerStem: {
+    width: 0,
+    height: 0,
+    borderLeftWidth: 7,
+    borderRightWidth: 7,
+    borderTopWidth: 10,
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    marginTop: -2
   },
   fallback: {
     minHeight: 240,

@@ -1,7 +1,15 @@
+const { withEntitlementsPlist } = require('@expo/config-plugins');
+
 const optionalValue = (value) => (value && value.trim().length > 0 ? value : undefined);
 
-const googleMapsIosApiKey = optionalValue(process.env.EXPO_PUBLIC_GOOGLE_MAPS_IOS_API_KEY);
-const googleMapsAndroidApiKey = optionalValue(process.env.EXPO_PUBLIC_GOOGLE_MAPS_ANDROID_API_KEY);
+const googleMapsIosApiKey = optionalValue(
+  process.env.EXPO_PUBLIC_GOOGLE_MAPS_IOS_API_KEY || process.env.GOOGLE_MAPS_IOS_API_KEY
+);
+const googleMapsAndroidApiKey = optionalValue(
+  process.env.EXPO_PUBLIC_GOOGLE_MAPS_ANDROID_API_KEY ||
+    process.env.GOOGLE_MAPS_ANDROID_API_KEY ||
+    process.env.GOOGLE_MAPS_API_KEY
+);
 
 const base = {
   name: 'TripMap',
@@ -14,11 +22,11 @@ const base = {
   ios: {
     supportsTablet: true,
     bundleIdentifier: 'com.uri.tripmap',
-    buildNumber: '20'
+    buildNumber: '21'
   },
   android: {
     package: 'com.tripmap.app',
-    versionCode: 19,
+    versionCode: 23,
     adaptiveIcon: {
       backgroundColor: '#F8F6F1',
       foregroundImage: './assets/android-icon-foreground.png',
@@ -33,6 +41,12 @@ const base = {
   }
 };
 
+const withoutRemotePushEntitlement = (config) =>
+  withEntitlementsPlist(config, (configWithEntitlements) => {
+    delete configWithEntitlements.modResults['aps-environment'];
+    return configWithEntitlements;
+  });
+
 module.exports = {
   ...base,
   plugins: [
@@ -45,12 +59,7 @@ module.exports = {
         microphonePermission: false
       }
     ],
-    [
-      'expo-notifications',
-      {
-        defaultChannel: 'cancellation-reminders'
-      }
-    ]
+    withoutRemotePushEntitlement
   ],
   ios: {
     ...base.ios,
@@ -77,6 +86,8 @@ module.exports = {
   },
   extra: {
     ...base.extra,
-    firebaseProjectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID || ''
+    firebaseProjectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID || '',
+    googleMapsIosConfigured: Boolean(googleMapsIosApiKey),
+    googleMapsAndroidConfigured: Boolean(googleMapsAndroidApiKey)
   }
 };
